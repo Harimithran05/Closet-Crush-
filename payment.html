@@ -1,0 +1,216 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Payment | Closet Crush</title>
+<link rel="stylesheet" href="web.css">
+
+<style>
+.payment-banner {
+    text-align: center;
+    padding: 40px 15px;
+    background: #f8dfe4;
+}
+.payment-banner h1 {
+    color: #864c55;
+    font-size: 38px;
+    font-weight: normal;
+}
+.payment-container {
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 30px;
+    background: white;
+    border: 1px solid #f0d0d6;
+    border-radius: 8px;
+}
+.payment-container h2 {
+    color: #864c55;
+    margin-bottom: 20px;
+}
+.order-item {
+    padding: 12px 0;
+    border-bottom: 1px solid #f0d0d6;
+    color: #80666a;
+    line-height: 1.8;
+}
+.grand-total {
+    text-align: right;
+    font-size: 21px;
+    color: #864c55;
+    font-weight: bold;
+    margin: 20px 0;
+}
+.payment-container label {
+    display: block;
+    margin: 15px 0;
+    color: #604044;
+}
+.payment-container input[type="radio"] {
+    margin-right: 10px;
+}
+.pay-button {
+    width: 100%;
+    padding: 14px;
+    margin-top: 20px;
+    background: #b96879;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 15px;
+}
+.pay-button:hover { background: #914b5b; }
+.back-link {
+    display: inline-block;
+    margin-top: 20px;
+    color: #a65c6c;
+    text-decoration: none;
+}
+.success {
+    display: none;
+    text-align: center;
+    padding: 25px 0;
+}
+.success h2 { color: #47865b; }
+.success p { margin: 12px 0; color: #604044; }
+.success-icon { font-size: 55px; }
+</style>
+</head>
+
+<body>
+
+<header class="site-header">
+    <a href="index.html" class="brand">CLOSET CRUSH</a>
+    <p class="tagline">WEAR YOUR CONFIDENCE</p>
+    <div class="brand-line"></div>
+    <nav class="navbar">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="collections.html">Collections</a>
+        <a href="products.html">Products</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+</header>
+
+<section class="payment-banner">
+    <h1>Checkout & Payment</h1>
+    <p>Complete your Closet Crush order.</p>
+</section>
+
+<main class="payment-container">
+    <div id="checkout">
+        <h2>Order Summary</h2>
+        <div id="orderItems"></div>
+        <div class="grand-total" id="total"></div>
+
+        <h2>Choose Payment Method</h2>
+
+        <form id="paymentForm">
+            <label>
+                <input type="radio" name="payment" value="UPI" required>
+                UPI
+            </label>
+
+            <label>
+                <input type="radio" name="payment" value="Card">
+                Credit / Debit Card
+            </label>
+
+            <label>
+                <input type="radio" name="payment" value="Cash on Delivery">
+                Cash on Delivery
+            </label>
+
+            <button type="submit" class="pay-button">
+                CONFIRM DEMO ORDER
+            </button>
+        </form>
+
+        <a href="products.html" class="back-link">
+            ← Back to Products
+        </a>
+    </div>
+
+    <div class="success" id="success">
+        <div class="success-icon">✓</div>
+        <h2>Order Placed Successfully!</h2>
+        <p>Thank you for shopping with Closet Crush.</p>
+        <p id="orderNumber"></p>
+        <p id="paymentMethod"></p>
+        <p>Your order total: <strong id="successTotal"></strong></p>
+        <a href="index.html" class="pay-button"
+           style="display:block;text-decoration:none">
+            CONTINUE SHOPPING
+        </a>
+    </div>
+</main>
+
+<script>
+let cart = JSON.parse(localStorage.getItem("closetCrushCart") || "[]");
+
+const orderItems = document.getElementById("orderItems");
+const totalElement = document.getElementById("total");
+
+const total = cart.reduce(
+    (sum, item) => sum + item.price * item.quantity, 0
+);
+
+if (cart.length === 0) {
+    orderItems.innerHTML =
+        "<p>Your cart is empty. Please select products first.</p>";
+    document.getElementById("paymentForm").style.display = "none";
+} else {
+    orderItems.innerHTML = cart.map(item => `
+        <div class="order-item">
+            <strong>${item.name}</strong><br>
+            Brand: ${item.brand}<br>
+            Size: ${item.size} | Colour: ${item.color}<br>
+            Quantity: ${item.quantity}<br>
+            Price: ₹${(item.price * item.quantity).toLocaleString("en-IN")}
+        </div>
+    `).join("");
+
+    totalElement.textContent =
+        "Total: ₹" + total.toLocaleString("en-IN");
+}
+
+document.getElementById("paymentForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    if (cart.length === 0) {
+        alert("Your cart is empty.");
+        return;
+    }
+
+    const method = document.querySelector(
+        'input[name="payment"]:checked'
+    );
+
+    if (!method) {
+        alert("Please select a payment method.");
+        return;
+    }
+
+    const orderId = "CC" + Date.now().toString().slice(-8);
+
+    document.getElementById("checkout").style.display = "none";
+    document.getElementById("success").style.display = "block";
+
+    document.getElementById("orderNumber").textContent =
+        "Order ID: " + orderId;
+
+    document.getElementById("paymentMethod").textContent =
+        "Selected method: " + method.value;
+
+    document.getElementById("successTotal").textContent =
+        "₹" + total.toLocaleString("en-IN");
+
+    localStorage.removeItem("closetCrushCart");
+});
+</script>
+
+</body>
+</html>

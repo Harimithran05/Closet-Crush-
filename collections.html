@@ -1,0 +1,196 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Collections | Closet Crush</title>
+    <link rel="stylesheet" href="web.css">
+
+    <style>
+        .collection-banner {
+            text-align: center;
+            padding: 50px 20px;
+            background: #f8dfe4;
+        }
+
+        .collection-banner h1 {
+            font-size: 42px;
+            font-weight: normal;
+            color: #864c55;
+        }
+
+        .collection-banner p {
+            color: #90656b;
+            margin-top: 12px;
+        }
+
+        .collection-section {
+            padding: 50px 7%;
+            text-align: center;
+        }
+
+        .collection-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 30px;
+            max-width: 1100px;
+            margin: 35px auto 0;
+        }
+
+        .collection-card {
+            position: relative;
+            display: block;
+            height: 360px;
+            overflow: hidden;
+            border-radius: 8px;
+            text-decoration: none;
+            background: #f4e5dc;
+        }
+
+        .collection-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .collection-card:hover img {
+            transform: scale(1.06);
+        }
+
+        .collection-overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 30px 15px;
+            color: white;
+            background: linear-gradient(
+                transparent 35%,
+                rgba(45, 23, 27, 0.75)
+            );
+        }
+
+        .collection-overlay h2 {
+            font-size: 32px;
+            font-weight: normal;
+            margin-bottom: 8px;
+        }
+
+        .collection-overlay p {
+            font-family: Arial, sans-serif;
+            font-size: 13px;
+        }
+
+        .collection-overlay span {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 20px;
+            border: 1px solid white;
+            font-family: Arial, sans-serif;
+            font-size: 11px;
+            letter-spacing: 1.5px;
+        }
+
+        .collection-card:hover .collection-overlay span {
+            background: white;
+            color: #864c55;
+        }
+
+        @media (max-width: 650px) {
+            .collection-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .collection-card {
+                height: 320px;
+            }
+
+            .collection-banner h1 {
+                font-size: 34px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="site-header">
+        <a href="index.html" class="brand">CLOSET CRUSH</a>
+        <p class="tagline">WEAR YOUR CONFIDENCE</p>
+        <div class="brand-line"></div>
+
+        <nav class="navbar">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="collections.html" class="active">Collections</a>
+            <a href="products.html">Products</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
+
+    <section class="collection-banner">
+        <h1>Our Collections</h1>
+        <p>Find the perfect style for every moment.</p>
+    </section>
+
+    <section class="collection-section">
+        <div class="collection-grid">
+            <a href=""
+               class="collection-card">
+                <img
+                    src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=900&q=85"
+                    alt="Western fashion collection">
+
+                <div class="collection-overlay">
+                    <h2>Western Wear</h2>
+                    <p>Modern styles for a bold look.</p>
+                    <span>EXPLORE COLLECTION</span>
+                </div>
+            </a>
+            <a href="products.html?category=formals"
+               class="collection-card">
+                <img
+                    src="https://images.unsplash.com/photo-1487222477894-8943e31ef7b2?auto=format&fit=crop&w=900&q=85"
+                    alt="Formal fashion collection">
+
+                <div class="collection-overlay">
+                    <h2>Formals</h2>
+                    <p>Elegant outfits for every occasion.</p>
+                    <span>EXPLORE COLLECTION</span>
+                </div>
+            </a>
+            <a href="products.html?category=casual"
+               class="collection-card">
+                <img
+                    src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=900&q=85"
+                    alt="Casual fashion collection">
+
+                <div class="collection-overlay">
+                    <h2>Casual Wear</h2>
+                    <p>Comfort meets everyday style.</p>
+                    <span>EXPLORE COLLECTION</span>
+                </div>
+            </a>
+            <a href="products.html?category=bridal"
+               class="collection-card">
+                <img
+                    src="https://images.unsplash.com/photo-1594552072238-b8a33785b261?auto=format&fit=crop&w=900&q=85"
+                    alt="Bridal fashion collection">
+
+                <div class="collection-overlay">
+                    <h2>Bridal Wear</h2>
+                    <p>Beautiful looks for your special day.</p>
+                    <span>EXPLORE COLLECTION</span>
+                </div>
+            </a>
+
+        </div>
+    </section>
+
+</body>
+</html>
+
